@@ -1,33 +1,18 @@
-# beastify
+# bookmark-it
 
-**This add-on injects JavaScript into web pages. The `addons.mozilla.org` domain disallows this operation, so this add-on will not work properly when it's run on pages in the `addons.mozilla.org` domain.**
+## What it does
 
-## What it does ##
+Displays a simple button in the menu bar that toggles a bookmark for the currently active tab.
 
-The extension includes:
+To display the button, the extension registers a [browserAction](https://developer.mozilla.org/en-US/Add-ons/WebExtensions/API/browserAction) in the manifest.
 
-* a browser action with a popup including HTML, CSS, and JS
-* a content script
-* three images, each of a different beast, packaged as web accessible resources
+A background script will listen for tab events and update the browserAction icon correspondingly. It also listens for `browserAction.onClicked` events to create or remove a bookmark when the user has clicked the icon.
 
-When the user clicks the browser action button, the popup is shown, enabling
-the user to choose one of three beasts.
+## What it shows
 
-When they choose a beast, the extension injects the content script into
-the current page, and sends the content script a message containing
-the name of the chosen beast.
-
-When the content script receives this message, it replaces the current page
-content with an image of the chosen beast.
-
-When the user clicks the reset button, the page reloads, and reverts to its original form.
-
-## What it shows ##
-
-* write a browser action with a popup
-* how to have different browser_action images based upon the theme
-* give the popup style and behavior using CSS and JS
-* inject a content script programmatically using `tabs.executeScript()`
-* send a message from the main extension to a content script
-* use web accessible resources to enable web pages to load packaged content
-* reload web pages
+* how to use the various `bookmarks` functions
+  * create a bookmark
+  * remove a bookmark
+  * search bookmarks by url
+* how to register a browserAction
+* how to listen for tab changes
