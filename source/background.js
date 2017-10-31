@@ -34,18 +34,35 @@ function toggleBookmark() {
     }
 }
 
+function logTabs(tabs) {
+    const whatsappUrl = 'web.whatsapp.com'
+
+    for (let tab of tabs) {
+        //console.log(tab.url);
+
+        var urlString = tab.url;
+
+        if (urlString.includes(whatsappUrl)) {
+            var tabId = tab.id;
+            console.log('TABID: ' + tabId);
+        }
+    }
+
+    var createData = {
+        url: "https://web.whatsapp.com/",
+    };
+
+    var creating = browser.tabs.create(createData)
+}
+
+function onError(error) {
+    console.log(`Error: ${error}`);
+}
+
 function openNewTab() {
 
-    let createData = {
-        type: "popup",
-        url: "https://web.whatsapp.com/",
-        width: 800,
-        height: 600
-    };
-    let creating = browser.windows.create(createData);
-    creating.then(() => {
-        console.log("The normal window has been created");
-    });
+    var querying = browser.tabs.query({});
+    querying.then(logTabs, onError);
 }
 
 browser.browserAction.onClicked.addListener(openNewTab);
